@@ -61,7 +61,7 @@
                                     <label for="name" class="form-label">Nama</label>
                                     <div class="position-relative">
                                         <input @if ($user->level != 'admin') @readonly(true) @endif type="text"
-                                            class="form-control py-2" placeholder="e.g. Muhammad Adji" id="name"
+                                            class="form-control py-2" placeholder="e.g. Jhon Doe" id="name"
                                             name="name" value="{{ old('name', $user->name) }}" />
                                         <div class="form-control-icon">
                                             <i class="bi bi-person py-2"></i>
