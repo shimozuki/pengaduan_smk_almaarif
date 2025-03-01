@@ -122,7 +122,7 @@
                     </ul>
                 </li>
 
-                @can('admin')
+                @can('admin1')
                     <li class="sidebar-item {{ Request::is('dashboard/website*') ? 'active' : '' }}">
                         <a href="/dashboard/website" class="sidebar-link">
                             <i class="bi bi-gear"></i>
