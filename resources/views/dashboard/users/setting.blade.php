@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-6 col-12 mb-1">
                                 <div class="form-group has-icon-left mandatory @error('nik') is-invalid @enderror">
-                                    <label for="nik" class="form-label">NIM</label>
+                                    <label for="nik" class="form-label">NISN</label>
                                     <div class="position-relative">
                                         <input @if ($user->level != 'admin') @readonly(true) @endif type="text"
                                             class="form-control py-2" placeholder="e.g. 1050241708900001" id="nik"

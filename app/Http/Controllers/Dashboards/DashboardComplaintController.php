@@ -38,7 +38,7 @@ class DashboardComplaintController extends Controller
         $previousUrl = $request->headers->get('referer');
 
         return view("dashboard.complaints.create", [
-            "title" => "Buat Keluhan",
+            "title" => "Buat Pengaduan",
             "categories" => Category::all()->sortBy("name"),
             "previousUrl" => $previousUrl,
         ]);

@@ -18,7 +18,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h2>Buat Keluhan</h2>
+                    <h2>Buat Pengaduan</h2>
                     <p class="text-subtitle text-muted">
                         Ceritakan keluhan yang kamu miliki.
                     </p>
@@ -84,7 +84,7 @@
                                         <div class="col-md-6 col-12 mb-1">
                                             <div
                                                 class="form-group has-icon-left mandatory @error('slug') is-invalid @enderror">
-                                                <label for="slug" class="form-label">Slug</label>
+                                                <label for="slug" class="form-label">Konteks Pengaduan/aspirasi</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control py-2" placeholder="Sluggable"
                                                         id="slug" name="slug" value="{{ old('slug') }}" />
@@ -151,7 +151,7 @@
                                                             <label data-bs-toggle="tooltip"
                                                                 data-bs-original-title="Tempat kejadian berada di dalam sekolah"
                                                                 class="form-check-label form-label" for="place-in">
-                                                                Dalam kampus
+                                                                Dalam sekolah
                                                             </label>
                                                         </div>
                                                         <div class="form-check me-3">
@@ -161,7 +161,7 @@
                                                             <label data-bs-toggle="tooltip"
                                                                 data-bs-original-title="Tempat kejadian berada di luar sekolah"
                                                                 class="form-check-label form-label" for="place-out">
-                                                                Luar kampus
+                                                                Luar sekolah
                                                             </label>
                                                         </div>
                                                     </div>

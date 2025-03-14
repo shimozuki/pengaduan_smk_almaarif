@@ -63,7 +63,7 @@
                     <li class="sidebar-item {{ Request::is('dashboard/complaints*') ? 'active' : '' }}">
                         <a href="/dashboard/complaints" class="sidebar-link">
                             <i class="bi bi-chat-heart-fill"></i>
-                            <span>Keluhan</span>
+                            <span>Pengaduan</span>
                         </a>
                     </li>
                 @endcan

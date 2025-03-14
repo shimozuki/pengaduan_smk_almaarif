@@ -6,11 +6,11 @@
             @if (strpos(config('web_config')['WEB_LOGO_WHITE'], '/') === false)
                 <img src="{{ asset('images/' . config('web_config')['WEB_LOGO_WHITE']) }}"
                     alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px;">
-                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Setubully</h3>
+                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMK AL-Ma'arif</h3>
             @else
                 <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO_WHITE']) }}"
                     alt="Logo {{ config('web_config')['WEB_TITLE'] }}"style="width: 100px; height: 100px;">
-                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Setubully</h3>
+                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMK AL-Ma'arif</h3>
             @endif
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
