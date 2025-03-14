@@ -26,8 +26,8 @@ class DashboardAuthController extends Controller
         if (Auth::attempt(["username" => $credentials["username"], "password" => $credentials['password']])) {
             $request->session()->regenerate();
 
-            // return redirect()->intended('/dashboard')->with("success", "Login berhasil!");
-            return redirect()->intended($this->redirectTo)->with("success", "Login berhasil!");
+            return redirect()->intended('/dashboard')->with("success", "Login berhasil!");
+            // return redirect()->intended($this->redirectTo)->with("success", "Login berhasil!");
         }
 
         return redirect('/login')->with("error", 'Login gagal :(');
