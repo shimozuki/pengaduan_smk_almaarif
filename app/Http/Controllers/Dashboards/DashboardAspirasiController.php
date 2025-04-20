@@ -76,7 +76,7 @@ class DashboardAspirasiController extends Controller
             $complaint = Complaint::create($credentials);
             return redirect('/dashboard/aspirasis/' . $complaint->slug)->with('success', 'Aspirasi kamu berhasil dibuat!');
         } catch (\Exception $e) {
-            return redirect('/dashboard/aspirasis')->withErrors('Keluhan kamu gagal dibuat.');
+            return $e;
         }
     }
 
