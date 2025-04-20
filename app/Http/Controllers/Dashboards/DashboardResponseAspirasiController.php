@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class DashboardResponseController extends Controller
+class DashboardResponseAspirasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +20,13 @@ class DashboardResponseController extends Controller
         $responses = Response::with(["officer", "complaint"])
             ->where("officer_nik", auth()->user()->nik)
             ->whereHas("complaint", function ($query) {
-                $query->where("category_id", 12);
+                $query->where("category_id", 13);
             })
             ->orderByDesc("created_at")
             ->get() ?? [];
 
 
-        return view("dashboard.responses.index", [
+        return view("dashboard.responses_aspirasi.index", [
             "title" => "Tanggapan",
             "responses" => $responses,
         ]);
@@ -44,7 +44,7 @@ class DashboardResponseController extends Controller
         // Short the responses based on new response (date)
         $sortedResponses = $complaint->responses->sortByDesc("created_at");
 
-        return view("dashboard.responses.create", [
+        return view("dashboard.responses_aspirasi.create", [
             "title" => "Buat Tanggapan",
             "complaint" => $complaint,
             "responses" => $sortedResponses,
@@ -74,9 +74,9 @@ class DashboardResponseController extends Controller
             // Update status
             Complaint::where('id', $response->complaint_id)->update(['status' => $credentials["status"]]);
             // Redirect to response with id
-            return redirect('/dashboard/responses/create/' . $response->complaint->slug)->with('success', 'Tanggapan kamu berhasil dibuat!');
+            return redirect('/dashboard/responses_aspirasis/create/' . $response->complaint->slug)->with('success', 'Tanggapan kamu berhasil dibuat!');
         } catch (\Exception $e) {
-            return redirect('/dashboard/responses')->withErrors('Tanggapan kamu gagal dibuat.');
+            return redirect('/dashboard/responses_aspirasis')->withErrors('Tanggapan kamu gagal dibuat.');
         }
     }
 
@@ -92,10 +92,10 @@ class DashboardResponseController extends Controller
 
         // Validate if the response is owned by the user
         if ($response->officer_nik !== auth()->user()->nik) {
-            return redirect('/dashboard/responses')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
+            return redirect('/dashboard/responses_aspirasis')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
         }
 
-        return view("dashboard.responses.show", [
+        return view("dashboard.responses_aspirasis.show", [
             "title" => "Tanggapan",
             "response" => $response,
             "previousUrl" => $previousUrl
@@ -114,10 +114,10 @@ class DashboardResponseController extends Controller
 
         // Validate if the response is owned by the user
         if ($response->officer_nik !== auth()->user()->nik) {
-            return redirect('/dashboard/responses')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
+            return redirect('/dashboard/responses_aspirasis')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
         }
 
-        return view("dashboard.responses.edit", [
+        return view("dashboard.responses_aspirasi.edit", [
             "title" => "Sunting Tanggapan",
             "response" => $response,
             "complaint" => $response->complaint,
@@ -153,16 +153,16 @@ class DashboardResponseController extends Controller
             // Compare the arrays to see if any attributes have changed
             if (($oldAttributes === $newAttributes) && ($response->complaint->status === $credentials["status"])) {
                 // The instance of the $complaint record has not been updated
-                return redirect('/dashboard/responses/' . $response->id)->with('info', 'Kamu tidak melakukan editing pada tanggapan.');
+                return redirect('/dashboard/responses_aspirasis/' . $response->id)->with('info', 'Kamu tidak melakukan editing pada tanggapan.');
             }
 
             // Update status
             Complaint::where('id', $responseNew->complaint_id)->update(['status' => $credentials["status"]]);
 
             // The instance of the $complaint record has been updated
-            return redirect('/dashboard/responses/' . $response->id)->with('success', 'Tanggapan kamu berhasil di-edit!');
+            return redirect('/dashboard/responses_aspirasis/' . $response->id)->with('success', 'Tanggapan kamu berhasil di-edit!');
         } catch (\Exception $e) {
-            return redirect('/dashboard/responses')->withErrors('Tanggapan kamu gagal di-edit.');
+            return redirect('/dashboard/responses_aspirasis')->withErrors('Tanggapan kamu gagal di-edit.');
         }
     }
 

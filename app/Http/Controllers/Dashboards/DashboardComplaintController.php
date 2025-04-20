@@ -20,7 +20,7 @@ class DashboardComplaintController extends Controller
      */
     public function index()
     {
-        $complaints = Complaint::with(["student", "responses", "category"])->where('student_nik', auth()->user()->nik)->orderBy('created_at', "desc")->get();
+        $complaints = Complaint::with(["student", "responses", "category"])->where('student_nik', auth()->user()->nik)->where('category_id', 12)->orderBy('created_at', "desc")->get();
 
         return view("dashboard.complaints.index", [
             "title" => "Keluhan",

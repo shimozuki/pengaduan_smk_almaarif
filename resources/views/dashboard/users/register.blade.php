@@ -215,11 +215,11 @@
                                                 <div class="d-flex">
                                                     <div class="form-check me-3">
                                                         <input class="form-check-input" type="radio" name="level"
-                                                            id="level-student" value="student"
-                                                            @if (old('level')=='student' ) checked @endif />
+                                                            id="level-wali_murid" value="wali_murid"
+                                                            @if (old('level')=='wali_murid' ) checked @endif />
                                                         <label data-bs-toggle="tooltip"
                                                             data-bs-original-title="Status pengguna sebagai siswa."
-                                                            class="form-check-label form-label" for="level-student">
+                                                            class="form-check-label form-label" for="level-wali_murid">
                                                             Wali Murid
                                                         </label>
                                                     </div>

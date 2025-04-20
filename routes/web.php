@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboards\{DashboardAdminCategoryController, DashboardAspirasiController, DashboardAuthController, DashboardComplaintController, DashboardResponseController, DashboardController, DashboardSettingController, DashboardUserPromoteController, DashboardUserController, DashboardUserSettingController};
+use App\Http\Controllers\Dashboards\{DashboardAdminCategoryController, DashboardAspirasiController, DashboardAuthController, DashboardComplaintController, DashboardResponseController, DashboardController, DashboardResponseAspirasiController, DashboardSettingController, DashboardUserPromoteController, DashboardUserController, DashboardUserSettingController};
 use App\Http\Controllers\{HomeController, ComplaintController, CategoryController};
 
 /*
@@ -54,16 +54,17 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
     Route::get("/", [DashboardController::class, 'index']);
 
     // Sluggable check
-    Route::get("/complaints/checkSlug", [DashboardComplaintController::class, "checkSlug"])->middleware("student");
-    Route::get("/aspirasis/checkSlug", [DashboardAspirasiController::class, "checkSlug"])->middleware("student");
+    Route::get("/complaints/checkSlug", [DashboardComplaintController::class, "checkSlug"])->middleware("auth");
+    Route::get("/aspirasis/checkSlug", [DashboardAspirasiController::class, "checkSlug"])->middleware("auth");
     Route::get("/categories/checkSlug", [DashboardAdminCategoryController::class, "checkSlug"])->middleware("admin");
 
     // Complaint
-    Route::resource("/complaints", DashboardComplaintController::class)->middleware("student");
+    Route::resource("/complaints", DashboardComplaintController::class)->middleware("auth");
     // Aspirasi
-    Route::resource("/aspirasis", DashboardAspirasiController::class)->middleware("student");
+    Route::resource("/aspirasis", DashboardAspirasiController::class)->middleware("auth");
     // Response
     Route::resource("/responses", DashboardResponseController::class)->middleware("response")->except(["create"]);
+    Route::resource("/aspirasis_r", DashboardResponseAspirasiController::class)->middleware("response")->except(["create"]);
     Route::get("/responses/create/{complaint:slug}", [DashboardResponseController::class, "create"])->middleware("response");
     // Category
     Route::resource("/categories", DashboardAdminCategoryController::class)->middleware("admin")->except(["show"]);
