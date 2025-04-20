@@ -66,6 +66,7 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
     Route::resource("/responses", DashboardResponseController::class)->middleware("response")->except(["create"]);
     Route::resource("/aspirasis_r", DashboardResponseAspirasiController::class)->middleware("response")->except(["create"]);
     Route::get("/responses/create/{complaint:slug}", [DashboardResponseController::class, "create"])->middleware("response");
+    Route::get("/aspirasis_r/create/{complaint:slug}", [DashboardResponseController::class, "create"])->middleware("response");
     // Category
     Route::resource("/categories", DashboardAdminCategoryController::class)->middleware("admin")->except(["show"]);
     // User

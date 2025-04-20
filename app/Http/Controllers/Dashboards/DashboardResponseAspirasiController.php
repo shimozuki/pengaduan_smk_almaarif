@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboards;
 
-use App\Models\{Response, Complaint};
+use App\Models\{AspirasiResponse, Response, Complaint};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
@@ -83,21 +83,21 @@ class DashboardResponseAspirasiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Response  $response
+     * @param  \App\Models\AspirasiResponse  $response
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Response $response)
+    public function show(Request $request, AspirasiResponse $aspirasis_r)
     {
         $previousUrl = $request->headers->get('referer');
 
         // Validate if the response is owned by the user
-        if ($response->officer_nik !== auth()->user()->nik) {
-            return redirect('/dashboard/responses_aspirasis')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
+        if ($aspirasis_r->officer_nik !== auth()->user()->nik) {
+            return redirect('/dashboard/aspirasis_r')->withErrors($aspirasis_r->officer_nik . ',' . auth()->user()->nik);
         }
 
-        return view("dashboard.responses_aspirasis.show", [
+        return view("dashboard.responses_aspirasi.show", [
             "title" => "Tanggapan",
-            "response" => $response,
+            "response" => $aspirasis_r,
             "previousUrl" => $previousUrl
         ]);
     }
@@ -108,19 +108,19 @@ class DashboardResponseAspirasiController extends Controller
      * @param  \App\Models\Response  $response
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Response $response)
+    public function edit(Request $request, AspirasiResponse $aspirasis_r)
     {
         $previousUrl = $request->headers->get('referer');
 
         // Validate if the response is owned by the user
-        if ($response->officer_nik !== auth()->user()->nik) {
+        if ($aspirasis_r->officer_nik !== auth()->user()->nik) {
             return redirect('/dashboard/responses_aspirasis')->withErrors('Kamu bukan pemilik dari tanggapan tersebut.');
         }
 
         return view("dashboard.responses_aspirasi.edit", [
             "title" => "Sunting Tanggapan",
-            "response" => $response,
-            "complaint" => $response->complaint,
+            "response" => $aspirasis_r,
+            "complaint" => $aspirasis_r->complaint,
             "previousUrl" => $previousUrl,
         ]);
     }
@@ -153,16 +153,16 @@ class DashboardResponseAspirasiController extends Controller
             // Compare the arrays to see if any attributes have changed
             if (($oldAttributes === $newAttributes) && ($response->complaint->status === $credentials["status"])) {
                 // The instance of the $complaint record has not been updated
-                return redirect('/dashboard/responses_aspirasis/' . $response->id)->with('info', 'Kamu tidak melakukan editing pada tanggapan.');
+                return redirect('/dashboard/aspirasis_r/' . $response->id)->with('info', 'Kamu tidak melakukan editing pada tanggapan.');
             }
 
             // Update status
             Complaint::where('id', $responseNew->complaint_id)->update(['status' => $credentials["status"]]);
 
             // The instance of the $complaint record has been updated
-            return redirect('/dashboard/responses_aspirasis/' . $response->id)->with('success', 'Tanggapan kamu berhasil di-edit!');
+            return redirect('/dashboard/aspirasis_r/' . $response->id)->with('success', 'Tanggapan kamu berhasil di-edit!');
         } catch (\Exception $e) {
-            return redirect('/dashboard/responses_aspirasis')->withErrors('Tanggapan kamu gagal di-edit.');
+            return redirect('/dashboard/aspirasis_r')->withErrors('Tanggapan kamu gagal di-edit.');
         }
     }
 

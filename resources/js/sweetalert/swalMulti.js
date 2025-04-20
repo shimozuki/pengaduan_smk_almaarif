@@ -48,7 +48,22 @@ else if (currentPath === "/dashboard/responses") {
                 );
             }
         });
-} else if (currentPath === "/dashboard/categories") {
+} else if (currentPath === "/dashboard/aspirasis_r") {
+    document
+        .getElementById("table1")
+        .addEventListener("click", function (event) {
+            if (
+                event.target &&
+                event.target.classList.contains("delete-record")
+            ) {
+                handleDelete(
+                    event.target.dataset.slug,
+                    "tanggapan",
+                    "/dashboard/aspirasis_r"
+                );
+            }
+        });
+}else if (currentPath === "/dashboard/categories") {
     document
         .getElementById("table1")
         .addEventListener("click", function (event) {
