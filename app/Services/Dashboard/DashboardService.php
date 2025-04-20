@@ -52,7 +52,7 @@ class DashboardService
                 "yourResponsesCount" => $yourResponsesCount,
                 "recentResponses" => $recentResponses,
             ]);
-        } else if ($user->level === "student") {
+        } else if ($user->level === "student" || $user->level === "wali_murid") {
             $complaints = Complaint::with(["student", "responses", "category"])->where("student_nik", $user->nik)->orderByDesc("created_at")->get();
 
             // Your complaints count

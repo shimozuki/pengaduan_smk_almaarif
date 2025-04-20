@@ -716,7 +716,196 @@
     </section>
     @endcan
 
-    @if(auth()->guest() or auth()->user()->level != "wali_murid" || auth()->guest() or auth()->user()->level != "student")
+    @can('student')
+    <section class="row">
+        <div class="col-12 col-lg-9">
+            <div class="row">
+                <div class="col-6">
+                    <a href="/dashboard/complaints">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div
+                                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                                        <div class="stats-icon purple mb-2">
+                                            <i class="iconly-boldShow"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">
+                                            Keluhan
+                                        </h6>
+                                        <h6 class="font-extrabold mb-0">
+                                            {{ $yourComplaintsCount }}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a href="/dashboard#recent-responses">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5" id="tanggapan-student">
+                                <div class="row">
+                                    <div
+                                        class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                                        <div class="stats-icon red mb-2">
+                                            <i class="iconly-boldBookmark"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">
+                                            Tanggapan
+                                        </h6>
+                                        <h6 class="font-extrabold mb-0">
+                                            {{ $responsesStudentCount }}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="d-none">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Statistik Keluhan Kamu</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-your-complaints">
+                                <div id="chart-your-responses">
+                                    <div class="d-flex justify-content-center skeleton-loading">
+                                        <div class="spinner-border" style="width: 3rem; height: 3rem"
+                                            role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="card">
+                <div class="card-body py-4 px-4">
+                    <div class="text-center">
+                        <div class="avatar avatar-xl mb-3">
+                            @if (auth()->user()->image)
+                            <img src="{{ asset('storage/' . auth()->user()->image) }}" />
+                            @else
+                            <img src="{{ asset('assets/static/images/faces/1.jpg') }}" />
+                            @endif
+                        </div>
+                        <div class="name">
+                            <h5 class="font-bold">{{ auth()->user()->name }}</h5>
+                            <h6 class="text-muted mb-0">
+                                {{ htmlspecialchars('@' . auth()->user()->username) }}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Keluhan Terbaru</h4>
+                </div>
+                <div class="card-content pb-4">
+                    @forelse ($recentComplaints as $complaint)
+                    <a href="/dashboard/complaints/{{ $complaint->slug }}">
+                        <div class="recent-message d-flex px-4 py-3">
+                            <div class="name ms-4">
+                                <h5 class="mb-1">{{ $complaint->title }}</h5>
+                                <h6 class="text-muted mb-0">
+                                    {{ $complaint->excerpt }}
+                                </h6>
+                            </div>
+                        </div>
+                    </a>
+                    @empty
+                    <div class="recent-message d-flex px-4 py-3">
+                        <div class="alert alert-warning" role="alert">
+                            <h4 class="alert-heading">Tidak ada keluhan :(</h4>
+                        </div>
+                    </div>
+                    @endforelse
+                    {{-- <div class="px-4">
+                                    <button class="btn btn-block btn-xl btn-outline-primary font-bold mt-3">
+                                        Start Conversation
+                                    </button>
+                                </div> --}}
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="recent-responses">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tanggapan Terbaru</h3>
+                </div>
+                <div class="card-body">
+                    @forelse ($recentResponsesStudent as $response)
+                    <a class="text-subtitle text-muted"
+                        href="/dashboard/complaints/{{ $response->complaint->slug }}">
+                        <div class="row g-0 px-4 mt-3 mb-4 pb-2">
+                            <div class="col-md-2 d-flex align-items-start">
+                                @if ($response->officer->user->image)
+                                <img width="200"
+                                    src="{{ asset('storage/' . $response->officer->user->image) }}"
+                                    alt="User avatar" class="img-fluid rounded-circle mx-auto">
+                                @else
+                                @if ($response->officer->user->gender == 'L')
+                                <img width="200"
+                                    src="{{ asset('assets/static/images/faces/2.jpg') }}"
+                                    alt="User avatar" class="img-fluid rounded-circle mx-auto">
+                                @else
+                                <img width="200"
+                                    src="{{ asset('assets/static/images/faces/5.jpg') }}"
+                                    alt="User avatar" class="img-fluid rounded-circle mx-auto">
+                                @endif
+                                @endif
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <div class="text-md-start text-center">
+                                        <h4 class="card-title">{{ $response->officer->user->name }}</h4>
+                                        <small class="card-subtitle mb-2 text-muted">
+                                            {{ $response->created_at->diffForHumans() }}
+                                        </small>
+                                        <p class="card-text">{!! $response->body !!}</p>
+                                    </div>
+                                    {{-- <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary">Reply</button>
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-outline-secondary">Report</button>
+                                                        </div>
+                                                        <small class="text-muted">Likes: 15</small>
+                                                    </div> --}}
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </a>
+                    @empty
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Tidak ada tanggapan :(</h4>
+                        <p>Belum ada tanggapan dari pihak terkait.</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
+    @endcan
+
+    @can('wali_murid')
     <section class="row">
         <div class="col-12 col-lg-9">
             <div class="row">

@@ -43,6 +43,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->level == "student";
         });
 
+        Gate::define("wali_murid", function (User $user) {
+            return $user->level == "wali_murid";
+        });
+
         try {
             Schema::hasTable('settings');
             $web_config = DB::table('settings')->pluck('value', 'key');
