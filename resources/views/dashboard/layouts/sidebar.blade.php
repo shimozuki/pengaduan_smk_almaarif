@@ -59,7 +59,7 @@
                     </a>
                 </li>
 
-                @cannot('admin')
+                @can('student')
                 <li class="sidebar-item {{ Request::is('dashboard/complaints*') ? 'active' : '' }}">
                     <a href="/dashboard/complaints" class="sidebar-link">
                         <i class="bi bi-chat-heart-fill"></i>
@@ -74,7 +74,23 @@
                 </li>
                 @endcan
 
-                @can('admin')
+                @can('wali_murid')
+                <li class="sidebar-item {{ Request::is('dashboard/complaints*') ? 'active' : '' }}">
+                    <a href="/dashboard/complaints" class="sidebar-link">
+                        <i class="bi bi-chat-heart-fill"></i>
+                        <span>Pengaduan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('dashboard/aspirasi*') ? 'active' : '' }}">
+                    <a href="/dashboard/aspirasis" class="sidebar-link">
+                        <i class="bi bi-chat-heart-fill"></i>
+                        <span>Pengaduan Aspirasi</span>
+                    </a>
+                </li>
+                @endcan
+
+
+                @can('officer')
                 <li class="sidebar-title">Admin</li>
                 <li class="sidebar-item {{ Request::is('dashboard/responses*') ? 'active' : '' }}">
                     <a href="/dashboard/responses" class="sidebar-link">
