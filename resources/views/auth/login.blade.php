@@ -7,10 +7,10 @@
             {{-- If WEB_LOGO_WHITE didn't contains "/" --}}
             @if (strpos(config('web_config')['WEB_LOGO_WHITE'], '/') === false)
             <img src="{{ asset('images/' . config('web_config')['WEB_LOGO_WHITE']) }}" alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px; position: inherit; align-items: center;">
-            <h4>SMK AL-Ma'arif</h4>
+            <h4>SMKS AL-Ma'arif</h4>
             @else
             <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO_WHITE']) }}" alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px; position: inherit; align-items: center;">
-            <h4>SMK AL-Ma'arif</h4>
+            <h4>SMKS AL-Ma'arif</h4>
             @endif
         </a>
         <div class="text-end me-3 ms-sm-5 mb-2 mb-sm-5 d-block d-sm-none">

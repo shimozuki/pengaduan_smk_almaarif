@@ -1,4 +1,4 @@
-<div id="sidebar" >
+<div id="sidebar">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
@@ -6,11 +6,11 @@
                     <a href="/" class="d-flex align-items-end">
                         {{-- If WEB_LOGO didn't contains "/" --}}
                         @if (strpos(config('web_config')['WEB_LOGO'], '/') === false)
-                            <img src="{{ asset('images/' . config('web_config')['WEB_LOGO']) }}"
-                                alt="Logo {{ config('web_config')['WEB_TITLE'] }}">
+                        <img src="{{ asset('images/' . config('web_config')['WEB_LOGO']) }}"
+                            alt="Logo {{ config('web_config')['WEB_TITLE'] }}">
                         @else
-                            <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO']) }}"
-                                alt="Logo {{ config('web_config')['WEB_TITLE'] }}">
+                        <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO']) }}"
+                            alt="Logo {{ config('web_config')['WEB_TITLE'] }}">
                         @endif
                     </a>
                 </div>
@@ -60,47 +60,53 @@
                 </li>
 
                 @can('student')
-                    <li class="sidebar-item {{ Request::is('dashboard/complaints*') ? 'active' : '' }}">
-                        <a href="/dashboard/complaints" class="sidebar-link">
-                            <i class="bi bi-chat-heart-fill"></i>
-                            <span>Pengaduan</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item {{ Request::is('dashboard/complaints*') ? 'active' : '' }}">
+                    <a href="/dashboard/complaints" class="sidebar-link">
+                        <i class="bi bi-chat-heart-fill"></i>
+                        <span>Pengaduan</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('dashboard/aspirasi*') ? 'active' : '' }}">
+                    <a href="/dashboard/aspirasis" class="sidebar-link">
+                        <i class="bi bi-chat-heart-fill"></i>
+                        <span>Pengaduan Aspirasi</span>
+                    </a>
+                </li>
                 @endcan
 
                 @cannot('student')
-                    <li class="sidebar-item {{ Request::is('dashboard/responses*') ? 'active' : '' }}">
-                        <a href="/dashboard/responses" class="sidebar-link">
-                            <i class="bi bi-stack"></i>
-                            <span>Tanggapan</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item {{ Request::is('dashboard/responses*') ? 'active' : '' }}">
+                    <a href="/dashboard/responses" class="sidebar-link">
+                        <i class="bi bi-stack"></i>
+                        <span>Tanggapan</span>
+                    </a>
+                </li>
                 @endcannot
 
                 @can('admin')
-                    <li class="sidebar-title">Admin</li>
-                    <li class="sidebar-item {{ Request::is('dashboard/categories*') ? 'active' : '' }}">
-                        <a href="/dashboard/categories" class="sidebar-link">
-                            <i class="bi bi-card-list"></i>
-                            <span>Kategori</span>
-                        </a>
-                    </li>
+                <li class="sidebar-title">Admin</li>
+                <li class="sidebar-item {{ Request::is('dashboard/categories*') ? 'active' : '' }}">
+                    <a href="/dashboard/categories" class="sidebar-link">
+                        <i class="bi bi-card-list"></i>
+                        <span>Kategori</span>
+                    </a>
+                </li>
 
-                    <li
-                        class="sidebar-item has-sub {{ (Request::is('dashboard/users*') or Request::is('dashboard/user/register')) ? 'active' : '' }}">
-                        <a href="#" class="sidebar-link">
-                            <i class="bi bi-person-fill"></i>
-                            <span>Pengguna</span>
-                        </a>
-                        <ul class="submenu {{ Request::is('dashboard/users*') ? 'active' : '' }}">
-                            <li class="submenu-item {{ Request::is('dashboard/users*') ? 'active' : '' }}">
-                                <a href="/dashboard/users">Semua</a>
-                            </li>
-                            <li class="submenu-item {{ Request::is('dashboard/user/register*') ? 'active' : '' }}">
-                                <a href="/dashboard/user/register">Registrasi</a>
-                            </li>
-                        </ul>
-                    </li>
+                <li
+                    class="sidebar-item has-sub {{ (Request::is('dashboard/users*') or Request::is('dashboard/user/register')) ? 'active' : '' }}">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-person-fill"></i>
+                        <span>Pengguna</span>
+                    </a>
+                    <ul class="submenu {{ Request::is('dashboard/users*') ? 'active' : '' }}">
+                        <li class="submenu-item {{ Request::is('dashboard/users*') ? 'active' : '' }}">
+                            <a href="/dashboard/users">Semua</a>
+                        </li>
+                        <li class="submenu-item {{ Request::is('dashboard/user/register*') ? 'active' : '' }}">
+                            <a href="/dashboard/user/register">Registrasi</a>
+                        </li>
+                    </ul>
+                </li>
                 @endcan
 
                 <li class="sidebar-title">Pengaturan</li>
@@ -123,12 +129,12 @@
                 </li>
 
                 @can('admin1')
-                    <li class="sidebar-item {{ Request::is('dashboard/website*') ? 'active' : '' }}">
-                        <a href="/dashboard/website" class="sidebar-link">
-                            <i class="bi bi-gear"></i>
-                            <span>Website</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item {{ Request::is('dashboard/website*') ? 'active' : '' }}">
+                    <a href="/dashboard/website" class="sidebar-link">
+                        <i class="bi bi-gear"></i>
+                        <span>Website</span>
+                    </a>
+                </li>
                 @endcan
             </ul>
         </div>

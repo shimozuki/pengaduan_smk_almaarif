@@ -20,7 +20,7 @@
                 <hr>
                 <div class="mb-4">
                     <a data-bs-toggle="tooltip" data-bs-original-title="Buat pengaduan yang kamu alami."
-                        href="/dashboard/complaints/create" class="btn btn-success px-2 pt-2 me-1">
+                        href="/dashboard/aspirasis/create" class="btn btn-success px-2 pt-2 me-1">
                         <span class="fa-fw fa-lg select-all fas text-white"></span>
                     </a>
                 </div>
@@ -88,7 +88,7 @@
                                     @if ($complaint->status == 2)
                                     <a data-bs-toggle="tooltip"
                                         data-bs-original-title="Rincian dari keluhan kamu yang sudah selesai."
-                                        href="/dashboard/complaints/{{ $complaint->slug }}"
+                                        href="/dashboard/aspirasis/{{ $complaint->slug }}"
                                         class="btn btn-info px-2 pt-2">
                                         <span class="fa-fw fa-lg select-all fas"></span>
                                     </a>
@@ -96,7 +96,7 @@
                                         <div class="me-2">
                                         <a data-bs-toggle="tooltip"
                                             data-bs-original-title="Lakukan penyuntingan terhadap keluhan kamu."
-                                            href="/dashboard/complaints/{{ $complaint->slug }}/edit"
+                                            href="/dashboard/aspirasis/{{ $complaint->slug }}/edit"
                                             class="btn btn-warning px-2 pt-2">
                                             <span class="fa-fw fa-lg select-all fas"></span>
                                         </a>
@@ -104,7 +104,7 @@
                                 <div class="me-2">
                                     <a data-bs-toggle="tooltip"
                                         data-bs-original-title="Rincian dari keluhan kamu."
-                                        href="/dashboard/complaints/{{ $complaint->slug }}"
+                                        href="/dashboard/aspirasis/{{ $complaint->slug }}"
                                         class="btn btn-info px-2 pt-2">
                                         <span class="fa-fw fa-lg select-all fas"></span>
                                     </a>

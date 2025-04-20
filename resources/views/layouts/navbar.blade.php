@@ -4,13 +4,13 @@
         <a class=" text-muted logo" href="/">
             {{-- If WEB_LOGO_WHITE didn't contains "/" --}}
             @if (strpos(config('web_config')['WEB_LOGO_WHITE'], '/') === false)
-                <img src="{{ asset('images/' . config('web_config')['WEB_LOGO_WHITE']) }}"
-                    alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px;">
-                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMK AL-Ma'arif</h3>
+            <img src="{{ asset('images/' . config('web_config')['WEB_LOGO_WHITE']) }}"
+                alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px;">
+            <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMKS AL-Ma'arif</h3>
             @else
-                <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO_WHITE']) }}"
-                    alt="Logo {{ config('web_config')['WEB_TITLE'] }}"style="width: 100px; height: 100px;">
-                    <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMK AL-Ma'arif</h3>
+            <img src="{{ asset('storage/' . config('web_config')['WEB_LOGO_WHITE']) }}"
+                alt="Logo {{ config('web_config')['WEB_TITLE'] }}" style="width: 100px; height: 100px;">
+            <h3 style="color: white; font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">SMKS AL-Ma'arif</h3>
             @endif
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -29,46 +29,46 @@
                         href="/about">Tentang</a>
                 </li>
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ Request::is('complaints') ? 'border-bottom border-3 fw-bold' : '' }}"
-                            href="/complaints">Keluhan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ Request::is('categories') ? 'border-bottom border-3 fw-bold' : '' }}"
-                            href="/categories">Kategori</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('complaints') ? 'border-bottom border-3 fw-bold' : '' }}"
+                        href="/complaints">Keluhan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('categories') ? 'border-bottom border-3 fw-bold' : '' }}"
+                        href="/categories">Kategori</a>
+                </li>
                 @endauth
             </ul>
 
             <ul class="nav">
                 @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false"> Selamat datang,
-                            {{ auth()->user()->name }}!</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>
-                                    Dashboard</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li>
-                                <form action="/logout" method="post">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i>
-                                        Keluar</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false"> Selamat datang,
+                        {{ auth()->user()->name }}!</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>
+                                Dashboard</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i>
+                                    Keluar</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 @endauth
 
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ Request::is('login') ? 'border-bottom border-3 fw-bold' : '' }}"
-                            href="/login">Masuk</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('login') ? 'border-bottom border-3 fw-bold' : '' }}"
+                        href="/login">Masuk</a>
+                </li>
                 @endguest
 
                 {{-- Light/Dark mode --}}

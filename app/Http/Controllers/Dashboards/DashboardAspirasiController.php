@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Dashboards;
 
-use App\Models\{Complaint, Category};
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\{Aspirasi, Complaint, Category};
+use Illuminate\Support\Str;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class DashboardComplaintController extends Controller
+class DashboardAspirasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class DashboardComplaintController extends Controller
      */
     public function index()
     {
-        $complaints = Complaint::with(["student", "responses", "category"])->where('student_nik', auth()->user()->nik)->orderBy('created_at', "desc")->get();
+        $complaints = Complaint::with(["student", "responses", "category"])->where('student_nik', auth()->user()->nik)->where('category_id', 13)->orderBy('created_at', "desc")->get();
 
-        return view("dashboard.complaints.index", [
+        return view("dashboard.aspirasi.index", [
             "title" => "Keluhan",
             "complaints" => $complaints,
         ]);
@@ -37,7 +37,7 @@ class DashboardComplaintController extends Controller
     {
         $previousUrl = $request->headers->get('referer');
 
-        return view("dashboard.complaints.create", [
+        return view("dashboard.aspirasi.create", [
             "title" => "Buat Pengaduan",
             "categories" => Category::all()->sortBy("name"),
             "previousUrl" => $previousUrl,
@@ -63,7 +63,7 @@ class DashboardComplaintController extends Controller
         ]);
 
         // Convert category's slug into id
-        $credentials["category_id"] = 12;
+        $credentials["category_id"] = 13;
 
         if ($request->file("image")) {
             $credentials["image"] = $request->file("image")->store('complaint-images');
@@ -74,33 +74,33 @@ class DashboardComplaintController extends Controller
 
         try {
             $complaint = Complaint::create($credentials);
-            return redirect('/dashboard/complaints/' . $complaint->slug)->with('success', 'Keluhan kamu berhasil dibuat!');
+            return redirect('/dashboard/aspirasis/' . $complaint->slug)->with('success', 'Aspirasi kamu berhasil dibuat!');
         } catch (\Exception $e) {
-            return redirect('/dashboard/complaints')->withErrors('Keluhan kamu gagal dibuat.');
+            return redirect('/dashboard/aspirasis')->withErrors('Keluhan kamu gagal dibuat.');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Complaint  $complaint
+     * @param  \App\Models\Aspirasi  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Complaint $complaint)
+    public function show(Request $request, Aspirasi $aspirasi)
     {
         $previousUrl = $request->headers->get('referer');
 
         // Validate if the complaint is owned by the user
-        if ($complaint->student_nik !== auth()->user()->nik) {
-            return redirect('/dashboard/complaints')->withErrors('Keluhan tidak ditemukan.');
+        if ($aspirasi->student_nik !== auth()->user()->nik) {
+            return redirect('/dashboard/aspirasis')->withErrors('Keluhan tidak ditemukan.');
         }
 
         // Short the responses based on new response (date)
-        $sortedResponses = $complaint->responses->sortByDesc("created_at");
+        $sortedResponses = $aspirasi->responses->sortByDesc("created_at");
 
-        return view("dashboard.complaints.show", [
-            "title" => ucwords($complaint->title),
-            "complaint" => $complaint,
+        return view("dashboard.aspirasi.show", [
+            "title" => ucwords($aspirasi->title),
+            "complaint" => $aspirasi,
             "responses" => $sortedResponses,
             "previousUrl" => $previousUrl,
         ]);
@@ -109,21 +109,21 @@ class DashboardComplaintController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Complaint  $complaint
+     * @param  \App\Models\Aspirasi  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Complaint $complaint)
+    public function edit(Request $request, Aspirasi $aspirasi)
     {
         $previousUrl = $request->headers->get('referer');
 
         // Validate if the complaint is owned by the user
-        if ($complaint->student_nik !== auth()->user()->nik) {
-            return redirect('/dashboard/complaints')->withErrors('Keluhan tidak ditemukan.');
+        if ($aspirasi->student_nik !== auth()->user()->nik) {
+            return redirect('/dashboard/aspirasis')->withErrors('Keluhan tidak ditemukan.');
         }
 
-        return view("dashboard.complaints.edit", [
+        return view("dashboard.aspirasi.edit", [
             "title" => "Sunting Keluhan",
-            "complaint" => $complaint,
+            "complaint" => $aspirasi, // kalau mau tetap pakai 'complaint' di view
             "categories" => Category::all(),
             "previousUrl" => $previousUrl,
         ]);
@@ -182,14 +182,14 @@ class DashboardComplaintController extends Controller
             // Compare the arrays to see if any attributes have changed
             if ($oldAttributes === $newAttributes) {
                 // The instance of the $complaint record has not been updated
-                return redirect('/dashboard/complaints/' . $complaint->slug)->with('info', 'Kamu tidak melakukan editing pada keluhan.');
+                return redirect('/dashboard/aspirasis/' . $complaint->slug)->with('info', 'Kamu tidak melakukan editing pada keluhan.');
             }
 
             // The instance of the $complaint record has been updated
-            return redirect('/dashboard/complaints/' . $complaint->slug)->with('success', 'Keluhan kamu berhasil di-edit!');
+            return redirect('/dashboard/aspirasis/' . $complaint->slug)->with('success', 'Keluhan kamu berhasil di-edit!');
         } catch (\Exception $e) {
             // If something was wrong ...
-            return redirect('/dashboard/complaints')->withErrors('Keluhan kamu gagal di-edit.');
+            return redirect('/dashboard/aspirasis')->withErrors('Keluhan kamu gagal di-edit.');
         }
     }
 
@@ -199,31 +199,27 @@ class DashboardComplaintController extends Controller
      * @param  \App\Models\Complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Complaint $complaint)
+    public function destroy(Aspirasi $aspirasi)
     {
-        if ($complaint->image) {
-            Storage::delete($complaint->image);
+        if ($aspirasi->image) {
+            Storage::delete($aspirasi->image);
         }
 
         try {
-            if (!Complaint::destroy($complaint->id)) {
-                throw new \Exception('Error deleting complaint.');
+            if (!Aspirasi::destroy($aspirasi->id)) {
+                throw new \Exception('Gagal menghapus aspirasi.');
             }
-        } catch (\PDOException | ModelNotFoundException | QueryException | \Exception $e) {
-            return response()->json([
-                "message" => "Gagal menghapus keluhan."
-            ], 422);
         } catch (\Throwable $e) {
-            // catch all exceptions here
             return response()->json([
-                "message" => "An error occurred: " . $e->getMessage()
+                "message" => "Terjadi kesalahan: " . $e->getMessage()
             ], 500);
         }
 
         return response()->json([
-            "message" => "Keluhan kamu telah dihapus!",
+            "message" => "Aspirasi berhasil dihapus.",
         ], 200);
     }
+
 
     public function checkSlug(Request $request)
     {

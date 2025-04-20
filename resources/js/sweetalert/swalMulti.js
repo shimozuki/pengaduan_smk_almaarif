@@ -17,7 +17,23 @@ if (currentPath === "/dashboard/complaints") {
                 );
             }
         });
-} else if (currentPath === "/dashboard/responses") {
+} else if (currentPath === "/dashboard/aspirasis") {
+    document
+        .getElementById("table1")
+        .addEventListener("click", function (event) {
+            if (
+                event.target &&
+                event.target.classList.contains("delete-record")
+            ) {
+                handleDelete(
+                    event.target.dataset.slug,
+                    "keluhan",
+                    "/dashboard/aspirasis"
+                );
+            }
+        });
+    }
+else if (currentPath === "/dashboard/responses") {
     document
         .getElementById("table1")
         .addEventListener("click", function (event) {

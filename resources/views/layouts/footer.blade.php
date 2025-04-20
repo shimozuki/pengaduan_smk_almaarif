@@ -7,10 +7,10 @@
                     {{-- If FOOTER_IMAGE didn't contains "/" --}}
                     @if (strpos(config('web_config')['FOOTER_IMAGE'], '/') === false)
                     <img src="{{ asset('images/' . config('web_config')['FOOTER_IMAGE']) }}" class="logo-smk" alt="Footer Website" width="100%">
-                    <h4 style="color: aliceblue;">SMK AL-Ma'arif</h4>
+                    <h4 style="color: aliceblue;">SMKS AL-Ma'arif</h4>
                     @else
                     <img class="img-fluid rounded mb-3 col-sm-5" src="{{ asset('storage/' . config('web_config')['FOOTER_IMAGE']) }}" alt="Footer Website">
-                    <h4 style="color: aliceblue;">SMK AL-Ma'arif</h4>
+                    <h4 style="color: aliceblue;">SMKS AL-Ma'arif</h4>
                     @endif
                 </div>
                 <div class="col pt-5 text-center text-white">
