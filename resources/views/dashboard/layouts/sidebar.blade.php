@@ -110,7 +110,8 @@
                         <span>Kategori</span>
                     </a>
                 </li>
-
+                @endcan
+                @can('admin')
                 <li
                     class="sidebar-item has-sub {{ (Request::is('dashboard/users*') or Request::is('dashboard/user/register')) ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
@@ -127,7 +128,6 @@
                     </ul>
                 </li>
                 @endcan
-
                 <li class="sidebar-title">Pengaturan</li>
                 <li class="sidebar-item has-sub {{ Request::is('dashboard/user/account*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
@@ -147,7 +147,7 @@
                     </ul>
                 </li>
 
-                @can('admin1')
+                @can('admin')
                 <li class="sidebar-item {{ Request::is('dashboard/website*') ? 'active' : '' }}">
                     <a href="/dashboard/website" class="sidebar-link">
                         <i class="bi bi-gear"></i>
