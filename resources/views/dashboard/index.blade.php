@@ -164,6 +164,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Statistik Pengaduan Dan Aspirasi Perbulan</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="skeleton-loading text-center mb-4">
+                                    <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <canvas id="chartDaily" height="100" class="mb-4"></canvas>
+                                <canvas id="chartWeekly" height="100" class="mb-4"></canvas>
+                                <canvas id="chartMonthly" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row" id="daftar-keluhan">
                     <div class="col-12">
                         <div class="card">
@@ -503,6 +523,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Statistik Pengaduan Dan Aspirasi Perbulan</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="skeleton-loading text-center mb-4">
+                                    <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <canvas id="chartDaily" height="100" class="mb-4"></canvas>
+                                <canvas id="chartWeekly" height="100" class="mb-4"></canvas>
+                                <canvas id="chartMonthly" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" id="daftar-keluhan">
                     <div class="col-12">
                         <div class="card">
@@ -1100,12 +1141,48 @@
 @section('scripts')
 <!-- Need: Apexcharts -->
 <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('/api/statistik-pengaduan')
+        .then(response => response.json())
+        .then(data => {
+            const renderChart = (ctxId, labels, values, label) => {
+                const ctx = document.getElementById(ctxId);
+                if (!ctx) return;
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: values,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            };
+
+            renderChart('chartDaily', data.daily.map(d => d.tanggal), data.daily.map(d => d.jumlah), 'Pengaduan Harian');
+            renderChart('chartWeekly', data.weekly.map(d => 'Minggu ' + d.minggu_ke), data.weekly.map(d => d.jumlah), 'Pengaduan Mingguan');
+            renderChart('chartMonthly', data.monthly.map(d => d.bulan), data.monthly.map(d => d.jumlah), 'Pengaduan Bulanan');
+        });
+</script>
 {{-- Dashboard --}}
 @vite(['resources/js/dashboard.js'])
 
 @cannot('student')
 {{-- Simple DataTable --}}
 <script src="{{ asset('assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
+
+
 {{-- Simple DataTable --}}
 @vite(['resources/js/simple-datatable/responses.js'])
 @endcannot

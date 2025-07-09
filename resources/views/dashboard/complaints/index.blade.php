@@ -51,7 +51,7 @@
                         <tr>
                             <th>#</th>
                             <th>Judul</th>
-                            <th>Kategori</th>
+                            <th>urgent/non urgent</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>

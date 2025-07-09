@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboards\{DashboardAdminCategoryController, DashboardAspirasiController, DashboardAuthController, DashboardComplaintController, DashboardResponseController, DashboardController, DashboardResponseAspirasiController, DashboardSettingController, DashboardUserPromoteController, DashboardUserController, DashboardUserSettingController};
-use App\Http\Controllers\{HomeController, ComplaintController, CategoryController};
+use App\Http\Controllers\{HomeController, ComplaintController, CategoryController, StatistikPengaduanController};
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
     Route::get("/responses/create/{complaint:slug}", [DashboardResponseController::class, "create"])->middleware("response");
     Route::get("/aspirasis_r/create/{complaint:slug}", [DashboardResponseController::class, "create"])->middleware("response");
     // Category
-    Route::resource("/categories", DashboardAdminCategoryController::class)->middleware("admin")->except(["show"]);
+    Route::resource("/categories", DashboardAdminCategoryController::class)->middleware("officer")->except(["show"]);
     // User
     Route::resource("/users", DashboardUserController::class)->middleware("admin")->except(["create"]);
     // Website settings
@@ -78,3 +78,4 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
 
 // Responses data
 Route::get('/dashboard/chart-data', [DashboardController::class, "chartData"])->middleware("auth");
+Route::get('/api/statistik-pengaduan', [StatistikPengaduanController::class, 'statistikPengaduan'])->name('api.statistik-pengaduan');

@@ -18,7 +18,6 @@ class DashboardResponseAspirasiController extends Controller
     public function index()
     {
         $responses = Response::with(["officer", "complaint"])
-            ->where("officer_nik", auth()->user()->nik)
             ->whereHas("complaint", function ($query) {
                 $query->where("category_id", 13);
             })

@@ -118,22 +118,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-6 col-12 mb-1">
-                                            <div class="form-group mandatory">
-                                                <label for="categories" class="form-label">Kategori</label>
-                                                <select class="choices form-select" id="categories" name="category_id">
-                                                    <optgroup label="Kategori">
-                                                        @forelse ($categories as $category)
-                                                            <option @if (old('category_id') == $category->slug) selected @endif
-                                                                value="{{ $category->slug }}">
-                                                                {{ $category->name }}</option>
-                                                        @empty
-                                                            <option>No category</option>
-                                                        @endforelse
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        </div> -->
+                                    <div class="col-md-6 col-12 mb-1">
+                                        <div class="form-group mandatory">
+                                            <label for="categories" class="form-label">Kategori</label>
+                                            <select class="choices form-select" id="categories" name="category_id">
+                                                <optgroup label="Kategori">
+                                                    @forelse ($categories as $category)
+                                                    <option @if (old('category_id')==$category->slug) selected @endif
+                                                        value="{{ $category->slug }}">
+                                                        {{ $category->name }}
+                                                    </option>
+                                                    @empty
+                                                    <option>No category</option>
+                                                    @endforelse
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-12 mb-1">

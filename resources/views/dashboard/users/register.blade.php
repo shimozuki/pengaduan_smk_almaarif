@@ -77,7 +77,7 @@
                                     <div class="col-md-6 col-12 mb-1">
                                         <div
                                             class="form-group has-icon-left mandatory @error('nik') is-invalid @enderror">
-                                            <label for="nik" class="form-label">NISN</label>
+                                            <label for="nik" class="form-label">NISN/NIP</label>
                                             <div class="position-relative">
                                                 <input type="text" class="form-control py-2"
                                                     placeholder="e.g. 1050241708900001" id="nik" name="nik"
@@ -213,7 +213,7 @@
                                                     Status
                                                 </label>
                                                 <div class="d-flex">
-                                                    <div class="form-check me-3">
+                                                    <!-- <div class="form-check me-3">
                                                         <input class="form-check-input" type="radio" name="level"
                                                             id="level-wali_murid" value="wali_murid"
                                                             @if (old('level')=='wali_murid' ) checked @endif />
@@ -222,7 +222,7 @@
                                                             class="form-check-label form-label" for="level-wali_murid">
                                                             Wali Murid
                                                         </label>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-check me-3">
                                                         <input class="form-check-input" type="radio" name="level"
                                                             id="level-student" value="student"
@@ -240,7 +240,7 @@
                                                         <label data-bs-toggle="tooltip"
                                                             data-bs-original-title="Status pengguna sebagai pegawai."
                                                             class="form-check-label form-label" for="level-officer">
-                                                            Guru
+                                                            officer
                                                         </label>
                                                     </div>
                                                     <!-- <div class="form-check me-3">
