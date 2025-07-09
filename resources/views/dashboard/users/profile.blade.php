@@ -77,13 +77,7 @@
 
             <div class="container text-center justify-content-center">
                 <div class="row">
-                    @can('student')
-                    <div class="col-12 col-md-6">
-                        <div class="">
-                            <h6>NISN: <span class="text-muted">{{ $user->nik }}</span></h6>
-                        </div>
-                    </div>
-                    @endcan
+
                     <div class="col-12 col-md-6">
                         <div class="">
                             <h6>Email: <span class="text-muted">{{ $user->email }}</span></h6>
@@ -116,13 +110,13 @@
                             @if ($user->level == 'student')
                             <h6>NISN:
                                 <span class="text-muted">
-                                    {{ $user->student->nisn ? $user->student->nisn : '-' }}
+                                    {{ $user->nik ? $user->nik : '-' }}
                                 </span>
                             </h6>
                             @else
                             <h6>NIP:
                                 <span class="text-muted">
-                                    {{ $user->officer->nip ? $user->officer->nip : '-' }}
+                                    {{ $user->nik ? $user->nik : '-' }}
                                 </span>
                             </h6>
                             @endif

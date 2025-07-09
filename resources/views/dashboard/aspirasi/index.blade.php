@@ -51,7 +51,7 @@
                         <tr>
                             <th>#</th>
                             <th>Judul</th>
-                            <th>Kategori</th>
+                            <th>Urgensi</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -66,7 +66,7 @@
                                 {{ $complaint->title }}
                             </td>
                             <td>
-                                {{ $complaint->category->name }}
+                                {{ $complaint->urgency }}
                             </td>
                             <td>
                                 @if ($complaint->status == 0)

@@ -58,6 +58,7 @@ class DashboardComplaintController extends Controller
             "date" => ["required", "date", "date_format:Y-m-d"],
             "place" => ["required"],
             "privacy" => ["required"],
+            "urgency" => ["required", "in:urgent,non-urgent"],
             "image" => ["image", "file", "max:5120"],
             "body" => ["required"],
         ]);
@@ -136,62 +137,40 @@ class DashboardComplaintController extends Controller
      * @param  \App\Models\Complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complaint $complaint)
+    public function update(Request $request, $id)
     {
+        $complaint = Complaint::findOrFail($id); // berdasarkan id
+
         $rules = [
+            "slug" => ["required", "unique:complaints,slug," . $id], // tetap validasi slug jika perlu
             "title" => ["required", "max:255"],
-            "category_id" => ["required"],
             "image" => ["image", "file", "max:5120"],
             "date" => ["required", "date", "date_format:Y-m-d"],
             "body" => ["required"],
             "place" => ["required"],
+            "urgency" => ["required", "in:urgent,non-urgent"],
             "privacy" => ["required"],
         ];
 
-        if ($request->slug != $complaint->slug) {
-            $rules["slug"] = ["required", "unique:complaints"];
-        }
-
         $credentials = $request->validate($rules);
 
-        // Convert slug into id
-        $credentials["category_id"] = Category::where('slug', $credentials["category_id"])->first()->id;
+        $credentials["category_id"] = 12;
+        $credentials["student_nik"] = auth()->user()->nik ?? null;
+        $credentials["excerpt"] = Str::limit(strip_tags($request->body), 50, ' ...');
 
         if ($request->file("image")) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-
             $credentials["image"] = $request->file("image")->store('complaint-images');
         }
 
-        $credentials["student_nik"] = auth()->user()->nik ?? null;
-        $credentials["excerpt"] = Str::limit(strip_tags($request->body), 50, ' ...');
+        $complaint->update($credentials);
 
-        try {
-            // $complaint = Complaint::where("id", $complaint->id)->update($credentials);
-            // Get the new and old of $complaint
-            $complaintOld = $complaint->fresh();
-            $complaint->update($credentials);
-            $complaintNew = $complaint->fresh();
-
-            // Get the old and new versions of the model as arrays
-            $oldAttributes = $complaintOld->getAttributes();
-            $newAttributes = $complaintNew->getAttributes();
-
-            // Compare the arrays to see if any attributes have changed
-            if ($oldAttributes === $newAttributes) {
-                // The instance of the $complaint record has not been updated
-                return redirect('/dashboard/complaints/' . $complaint->slug)->with('info', 'Kamu tidak melakukan editing pada keluhan.');
-            }
-
-            // The instance of the $complaint record has been updated
-            return redirect('/dashboard/complaints/' . $complaint->slug)->with('success', 'Keluhan kamu berhasil di-edit!');
-        } catch (\Exception $e) {
-            // If something was wrong ...
-            return redirect('/dashboard/complaints')->withErrors('Keluhan kamu gagal di-edit.');
-        }
+        return redirect('/dashboard/complaints')->with('success', 'Pengaduan berhasil di-update!');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

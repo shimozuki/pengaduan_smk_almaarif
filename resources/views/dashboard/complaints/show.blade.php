@@ -78,7 +78,7 @@
                     </div>
                     <div class="me-4">
                         <p>
-                            <span class="fw-bold">urgent/non urgent:</span> {{ $complaint->category->name }}
+                            <span class="fw-bold">Urgency:</span> {{ $complaint->urgency }}
                         </p>
                         <p>
                             <span class="fw-bold me-1">Status:</span>

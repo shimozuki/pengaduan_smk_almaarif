@@ -22,6 +22,20 @@ class Aspirasi extends Model
         'id',
     ];
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'category_id',
+        'image',
+        'date',
+        'body',
+        'place',
+        'urgency',
+        'privacy',
+        'student_nik',
+        'excerpt'
+    ];
+
     protected $with = ['category', 'student'];
 
     /**

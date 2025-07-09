@@ -20,6 +20,20 @@ class Complaint extends Model
         'id',
     ];
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'category_id',
+        'image',
+        'date',
+        'body',
+        'place',
+        'urgency',
+        'privacy',
+        'student_nik',
+        'excerpt'
+    ];
+
     protected $with = ['category', 'student'];
 
     /**
@@ -41,16 +55,16 @@ class Complaint extends Model
         /* SEARCH: COMPLAINT AND USER */
         if (isset($filters["search"]) && isset($filters["user"])) {
             return $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where("title", "like", "%" . $filters["search"] . "%")
                     ->orWhere("body", "like", "%" . $filters["search"] . "%")
             )
                 ->whereHas(
                     "student",
-                    fn ($query) =>
+                    fn($query) =>
                     $query->whereHas(
                         "user",
-                        fn ($query) =>
+                        fn($query) =>
                         $query->where("username", $filters["user"])
                             ->where('privacy', 'public')
                     )
@@ -60,13 +74,13 @@ class Complaint extends Model
         /* SEARCH: COMPLAINT AND CATEGORY */
         if (isset($filters["search"]) && isset($filters["category"])) {
             return $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where("title", "like", "%" . $filters["search"] . "%")
                     ->orWhere("body", "like", "%" . $filters["search"] . "%")
             )
                 ->whereHas(
                     "category",
-                    fn ($query) =>
+                    fn($query) =>
                     $query->where("slug", $filters["category"])
                 );
         }
@@ -82,7 +96,7 @@ class Complaint extends Model
 
 
             return $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where("title", "like", "%" . $filters["search"] . "%")
                     ->orWhere("body", "like", "%" . $filters["search"] . "%")
             )
@@ -99,16 +113,16 @@ class Complaint extends Model
 
             // Do query
             return $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where("title", "like", "%" . $filters["search"] . "%")
                     ->orWhere("body", "like", "%" . $filters["search"] . "%")
             )
                 ->whereHas(
                     "student",
-                    fn ($query) =>
+                    fn($query) =>
                     $query->whereHas(
                         "complaints",
-                        fn ($query) =>
+                        fn($query) =>
                         $query->where("privacy", $str)
                     )
                 );
@@ -117,9 +131,9 @@ class Complaint extends Model
         /* SEARCH: COMPLAINT */
         $query->when(
             $filters["search"] ?? false,
-            fn ($query, $search) =>
+            fn($query, $search) =>
             $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where("title", "like", "%" . $search . "%")
                     ->orWhere("body", "like", "%" . $search . "%")
             )
@@ -128,13 +142,13 @@ class Complaint extends Model
         /* SEARCH: USER */
         $query->when(
             $filters["user"] ?? false,
-            fn ($query, $user) =>
+            fn($query, $user) =>
             $query->whereHas(
                 "student",
-                fn ($query) =>
+                fn($query) =>
                 $query->whereHas(
                     "user",
-                    fn ($query) =>
+                    fn($query) =>
                     $query->where("username", $user)
                         ->where('privacy', 'public')
                 )
@@ -144,10 +158,10 @@ class Complaint extends Model
         /* SEARCH: CATEGORY */
         $query->when(
             $filters["category"] ?? false,
-            fn ($query, $category) =>
+            fn($query, $category) =>
             $query->whereHas(
                 "category",
-                fn ($query) =>
+                fn($query) =>
                 $query->where("slug", $category)
             )
         );

@@ -57,6 +57,8 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
     Route::get("/complaints/checkSlug", [DashboardComplaintController::class, "checkSlug"])->middleware("auth");
     Route::get("/aspirasis/checkSlug", [DashboardAspirasiController::class, "checkSlug"])->middleware("auth");
     Route::get("/categories/checkSlug", [DashboardAdminCategoryController::class, "checkSlug"])->middleware("admin");
+    Route::put('/dashboard/aspirasis/{id}', [DashboardAspirasiController::class, 'update']);
+    Route::put('/dashboard/pengaduan/{id}', [DashboardComplaintController::class, 'update']);
 
     // Complaint
     Route::resource("/complaints", DashboardComplaintController::class)->middleware("auth");

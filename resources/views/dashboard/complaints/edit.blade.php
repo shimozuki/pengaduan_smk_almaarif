@@ -68,7 +68,7 @@
                                 <p>Keluhan kamu sudah selesai ditangani.</p>
                             </div>
                             @else
-                            <form class="form" action="/dashboard/complaints/{{ $complaint->slug }}"
+                            <form class="form" action="/dashboard/complaints/{{ $complaint->id }}"
                                 method="POST" data-parsley-validate enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
@@ -136,19 +136,10 @@
                                     </div>
                                     <div class="col-md-6 col-12 mb-1">
                                         <div class="form-group mandatory">
-                                            <label for="categories" class="form-label">urgent/non urgent</label>
-                                            <select class="choices form-select" id="categories"
-                                                name="category_id">
-                                                <optgroup label="Kategori">
-                                                    @forelse ($categories as $category)
-                                                    <option @if (old('category_id', $complaint->category->slug) == $category->slug) selected @endif
-                                                        value="{{ $category->slug }}">
-                                                        {{ $category->name }}
-                                                    </option>
-                                                    @empty
-                                                    <option>No category</option>
-                                                    @endforelse
-                                                </optgroup>
+                                            <label for="urgency" class="form-label">Urgensi</label>
+                                            <select class="form-select" id="urgency" name="urgency" required>
+                                                <option value="urgent" {{ old('urgency', $complaint->urgency) == 'urgent' ? 'selected' : '' }}>Urgent</option>
+                                                <option value="non-urgent" {{ old('urgency', $complaint->urgency) == 'non-urgent' ? 'selected' : '' }}>Non-Urgent</option>
                                             </select>
                                         </div>
                                     </div>
