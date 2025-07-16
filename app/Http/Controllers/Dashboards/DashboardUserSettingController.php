@@ -134,7 +134,7 @@ class DashboardUserSettingController extends Controller
             return redirect('/dashboard/user/account/profile')->with('success', "Set-up kamu berhasil disimpan!");
         } catch (\Exception $e) {
             // If something was wrong ...
-            return redirect('/dashboard/user/account/profile')->withErrors("Set-up kamu gagal disimpan.");
+            return redirect('/dashboard/user/account/profile')->withErrors($e->getMessage());
         }
     }
 

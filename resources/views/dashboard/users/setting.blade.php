@@ -117,7 +117,7 @@
                             </div>
                             @else
                             <div class="form-group has-icon-left mandatory @error('nip') is-invalid @enderror">
-                                <label for="nip" class="form-label">NIP</label>
+                                <label for="nip" class="form-label">NIPON</label>
                                 <div class="position-relative">
                                     <input type="text"
                                         class="form-control py-2" placeholder="e.g. 1050241708900001" id="nik"
