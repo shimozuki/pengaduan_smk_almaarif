@@ -54,7 +54,6 @@ class DashboardUserSettingController extends Controller
         // Default rules for user
         $userRules = [
             "name" => ["required", "max:255"],
-            "nik" => ["required", "size:16", "string"],
             "nip" => ["nullable", "size:18", "string"],
             "nisn" => ["nullable", "size:10", "string"],
             "image" => ["image", "file", "max:2048"],
@@ -62,7 +61,6 @@ class DashboardUserSettingController extends Controller
 
         // Number rules for user (nik, nip, nisn)
         $numberRules = [
-            "nik" => ["nullable", "numeric"],
             "nip" => ["nullable", "numeric"],
             "nisn" => ["nullable", "numeric"],
         ];
