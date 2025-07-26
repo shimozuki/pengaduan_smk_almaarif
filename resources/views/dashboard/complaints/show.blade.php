@@ -105,7 +105,7 @@
                     <a href="#">
                         @if ($complaint->image)
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
-                            src="{{ asset("storage/$complaint->image") }}" alt="{{ $complaint->category->name }}">
+                            src="{{ asset("core/storage/app/public/$complaint->image") }}" alt="{{ $complaint->category->name }}">
                         @else
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
                             src="{{ asset('images/no-image-2.jpg') }}" alt="{{ $complaint->category->name }}">
@@ -138,7 +138,7 @@
                                         @if ($complaint->image)
                                         <img class="img-fluid rounded" data-bs-toggle="modal"
                                             data-bs-target="#imageDetail"
-                                            src="{{ asset("storage/$complaint->image") }}"
+                                            src="{{ asset("core/storage/app/public/$complaint->image") }}"
                                             alt="{{ $complaint->category->name }}">
                                         @else
                                         <img class="img-fluid rounded" data-bs-toggle="modal"
@@ -175,7 +175,7 @@
                     <div class="col-md-2 d-flex align-items-start">
                         @if ($response->officer->user->image)
                         <img width="200"
-                            src="{{ asset('storage') . '/' . $response->officer->user->image }}"
+                            src="{{ asset('core/storage/app/public/') . '/' . $response->officer->user->image }}"
                             alt="User avatar" class="img-fluid rounded-circle mx-auto">
                         @else
                         @if ($response->officer->user->gender == 'L')
@@ -222,6 +222,42 @@
 
 @section('scripts')
 {{-- SweetAlert --}}
+<script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).on('click', '.delete-record', function(e) {
+        e.preventDefault();
+        var slug = $(this).data('slug');
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Keluhan akan dihapus permanen.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/dashboard/complaints/' + slug,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire('Berhasil!', response.message, 'success').then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire('Gagal!', xhr.responseJSON?.message ?? 'Gagal menghapus.', 'error');
+                    }
+                });
+            }
+        });
+    });
+</script>
 @vite(['resources/js/sweetalert/swalSingle.js'])
 <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
 @endsection

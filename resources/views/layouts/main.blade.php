@@ -12,7 +12,9 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
         }
+        
     </style>
 </head>
 

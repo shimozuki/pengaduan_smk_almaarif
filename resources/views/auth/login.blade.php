@@ -14,7 +14,7 @@
             @endif
         </a>
         <div class="text-end me-3 ms-sm-5 mb-2 mb-sm-5 d-block d-sm-none">
-            <a href="/" class="text-white opacity-75">Kembali</a>
+            <a href="/login" class="text-white opacity-75">Kembali</a>
         </div>
     </div>
     <div class="text-center illus-login">
@@ -25,7 +25,7 @@
 
 <div class="col-12 col-sm-7 pt-3">
     <div class="text-end me-3 pt-3 me-sm-5 d-sm-block d-none">
-        <a href="/" class="text-secondary">Kembali</a>
+        <a href="/login" class="text-secondary">Kembali</a>
     </div>
     <h1 class="w-100 fw-bold text-center mt-5 mt-sm-0 mb-0 p-0 pt-sm-5 fs-3">MASUK</h1>
 
@@ -38,7 +38,7 @@
 
     <div class="card mt-5 p-sm-4 p-2 mb-0 border-start-0 border-end-0 margin-form">
         <div class="card-body">
-            <form action="/login" method="post" class="">
+            <form action="/login_log" method="post" class="">
                 @csrf
                 <div class="mb-4">
                     <label for="username" class="form-label">Username</label>

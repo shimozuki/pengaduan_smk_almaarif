@@ -43,7 +43,7 @@
                     <div class="col mb-3">
                         <div class="card mb-3">
                             @if ($complaints[0]->image)
-                                <img class="img-fluid rounded" src="{{ asset('storage/' . $complaints[0]->image) }}"
+                                <img class="img-fluid rounded" src="{{ asset('core/storage/app/public/' . $complaints[0]->image) }}"
                                     alt="{{ $complaints[0]->category->name }}">
                             @else
                                 <img class="img-fluid rounded" src="{{ asset('images/no-image-2.jpg') }}"
@@ -131,7 +131,7 @@
                                 </div>
 
                                 @if ($complaint->image)
-                                    <img class="img-fluid rounded" src="{{ asset("storage/$complaint->image") }}"
+                                    <img class="img-fluid rounded" src="{{ asset("core/storage/app/public/$complaint->image") }}"
                                         alt="{{ $complaint->category->name }}">
                                 @else
                                     <img class="img-fluid rounded" src="{{ asset('images/no-image-2.jpg') }}"

@@ -4,6 +4,8 @@
 <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
 <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 @if (!Route::is('login'))
     @vite('resources/js/navbar.js')
 @endif

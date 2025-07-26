@@ -117,7 +117,7 @@
                             </div>
                             @else
                             <div class="form-group has-icon-left mandatory @error('nip') is-invalid @enderror">
-                                <label for="nip" class="form-label">NIPON</label>
+                                <label for="nip" class="form-label">NIP</label>
                                 <div class="position-relative">
                                     <input type="text"
                                         class="form-control py-2" placeholder="e.g. 1050241708900001" id="nik"
@@ -219,7 +219,7 @@
 
                                     <!-- Image preview -->
                                     @if ($user->image)
-                                    <img src="{{ asset("storage/$user->image") }}"
+                                    <img src="{{ asset("core/storage/app/public/$user->image") }}"
                                         class="img-fluid bg-nav box-gradient rounded mb-3 col-sm-5">
                                     @endif
 

@@ -3,5 +3,5 @@
 <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
 @if (Request::is('dashboard/user/account/password*'))
-    @vite('resources/js/changepassword.js')
+@vite('core/resources/js/changepassword.js')
 @endif

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark text-white fixed-top {{ Request::is('complaints*') || Request::is('categories') ? 'bg-nav' : 'bg-transparent' }}"
     id="{{ Request::is('complaints*') || Request::is('categories') ? '' : 'navbar' }}">
-    <div class="container" id="navCont">
+    <div class="container-fluid px-3" id="navCont">
         <a class=" text-muted logo" href="/">
             {{-- If WEB_LOGO_WHITE didn't contains "/" --}}
             @if (strpos(config('web_config')['WEB_LOGO_WHITE'], '/') === false)
@@ -47,7 +47,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false"> Selamat datang,
                         {{ auth()->user()->name }}!</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>
+                        <li><a class="dropdown-item" href="/"><i class="bi bi-speedometer2 me-1"></i>
                                 Dashboard</a>
                         </li>
                         <li>

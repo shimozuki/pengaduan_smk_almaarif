@@ -1,6 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+<style>
+    .navbar-toggler {
+  position: relative;
+  z-index: 1060;
+  right: 0;
+}
+</style>
     <div class="page-content">
         <section class="row">
             <div class="col-12 mb-3 header-about bg-about">

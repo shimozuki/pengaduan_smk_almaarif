@@ -80,9 +80,9 @@
                         <div class="user-img d-flex align-items-center">
                             <div class="avatar avatar-md">
                                 @if (auth()->user()->image)
-                                    <img src="{{ asset('storage') . '/' . auth()->user()->image }}" />
+                                <img src="{{ asset('core/storage/app/public') . '/' . auth()->user()->image }}" />
                                 @else
-                                    <img src="{{ asset('assets/static/images/faces/1.jpg') }}" />
+                                <img src="{{ asset('assets/static/images/faces/1.jpg') }}" />
                                 @endif
                             </div>
                         </div>
@@ -99,12 +99,12 @@
                             Saya</a>
                     </li>
                     <li>
-                        <a class="dropdown-item @if (Request::is('dashboard/user/account/setting*')) active @endif"
+                        <a class="dropdown-item @if (Request::is('/dashboard/user/account/setting')) active @endif"
                             href="/dashboard/user/account/setting"><i class="icon-mid bi bi-gear me-2"></i>
                             Pengaturan Akun</a>
                     </li>
                     <li>
-                        <a class="dropdown-item @if (Request::is('dashboard/user/account/password*')) active @endif"
+                        <a class="dropdown-item @if (Request::is('/dashboard/user/account/password*')) active @endif"
                             href="/dashboard/user/account/password"><i class="icon-mid bi bi-key me-2"></i>
                             Password</a>
                     </li>
