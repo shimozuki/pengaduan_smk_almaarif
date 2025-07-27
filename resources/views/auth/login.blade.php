@@ -38,7 +38,7 @@
 
     <div class="card mt-5 p-sm-4 p-2 mb-0 border-start-0 border-end-0 margin-form">
         <div class="card-body">
-            <form action="/login_log" method="post" class="">
+            <form action="/login" method="post" class="">
                 @csrf
                 <div class="mb-4">
                     <label for="username" class="form-label">Username</label>
