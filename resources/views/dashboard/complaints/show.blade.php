@@ -247,7 +247,7 @@
                     },
                     success: function(response) {
                         Swal.fire('Berhasil!', response.message, 'success').then(() => {
-                            location.reload();
+                            window.location.href = '/dashboard/complaints';
                         });
                     },
                     error: function(xhr) {

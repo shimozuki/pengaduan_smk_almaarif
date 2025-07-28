@@ -249,7 +249,7 @@
                     },
                     success: function(response) {
                         Swal.fire('Berhasil!', response.message, 'success').then(() => {
-                            location.reload();
+                            window.location.href = '/dashboard/aspirasis';
                         });
                     },
                     error: function(xhr) {

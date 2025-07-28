@@ -201,6 +201,7 @@ class DashboardComplaintController extends Controller
 
         return response()->json([
             "message" => "Keluhan kamu telah dihapus!",
+            "redirect_url" => route('complaints.index')
         ], 200);
     }
 
