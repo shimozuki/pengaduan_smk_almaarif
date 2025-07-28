@@ -98,7 +98,7 @@
                                             <div class="position-relative">
                                                 <input type="text" class="form-control py-2"
                                                     placeholder="e.g. 1050241708900001" id="nik" name="nik"
-                                                    value="{{ old('nik', $user->nik) }}" maxlength="16" />
+                                                    value="{{ old('nik', $user->nik) }}" maxlength="18" />
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-person-vcard py-2"></i>
                                                 </div>
