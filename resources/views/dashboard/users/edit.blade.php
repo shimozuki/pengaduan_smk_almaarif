@@ -88,7 +88,13 @@
                                     <div class="col-md-6 col-12 mb-1">
                                         <div
                                             class="form-group has-icon-left mandatory @error('nik') is-invalid @enderror">
-                                            <label for="nik" class="form-label">NISN</label>
+                                            <label for="nik" class="form-label">
+                                                @if ($user->level == 'admin' || $user->level == 'officer')
+                                                NIP
+                                                @else
+                                                NISN
+                                                @endif
+                                            </label>
                                             <div class="position-relative">
                                                 <input type="text" class="form-control py-2"
                                                     placeholder="e.g. 1050241708900001" id="nik" name="nik"
@@ -231,7 +237,7 @@
 
                                                 <!-- Image preview -->
                                                 @if ($user->image)
-                                                <img src="{{ asset("core/storage/app/public/$user->image") }}"
+                                                <img src="{{ asset("storage/$user->image") }}"
                                                     class="img-fluid bg-nav box-gradient rounded mb-3 col-sm-5">
                                                 @endif
 

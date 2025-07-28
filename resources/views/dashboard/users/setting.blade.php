@@ -219,7 +219,7 @@
 
                                     <!-- Image preview -->
                                     @if ($user->image)
-                                    <img src="{{ asset("core/storage/app/public/$user->image") }}"
+                                    <img src="{{ asset("storage/$user->image") }}"
                                         class="img-fluid bg-nav box-gradient rounded mb-3 col-sm-5">
                                     @endif
 

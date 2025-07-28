@@ -105,7 +105,7 @@
                     <a href="#">
                         @if ($complaint->image)
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
-                            src="{{ asset("core/storage/app/public/$complaint->image") }}" alt="{{ $complaint->category->name }}">
+                            src="{{ asset("storage/$complaint->image") }}" alt="{{ $complaint->category->name }}">
                         @else
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
                             src="{{ asset('images/no-image-2.jpg') }}" alt="{{ $complaint->category->name }}">

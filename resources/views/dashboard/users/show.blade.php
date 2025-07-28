@@ -63,7 +63,7 @@
             <div class="card-body">
                 <div class="text-center mb-3">
                     @if ($user->image)
-                    <img width="150" class="rounded-circle" src="{{ asset("core/storage/app/public/$user->image") }}"
+                    <img width="150" class="rounded-circle" src="{{ asset("storage/$user->image") }}"
                         alt="{{ $user->username }}">
                     @else
                     @if ($user->gender == 'L')
@@ -90,8 +90,16 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="">
-                            <h6>NISN: <span class="text-muted">{{ $user->nik }}</span></h6>
+                            <h6>
+                                @if (in_array($user->level, ['admin', 'officer']))
+                                NIP:
+                                @else
+                                NISN:
+                                @endif
+                                <span class="text-muted">{{ $user->nik }}</span>
+                            </h6>
                         </div>
+
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="">

@@ -52,7 +52,7 @@ class DashboardUserController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            "nik" => ["required", "size:16", "string"],
+            "nik" => ["required", "string", "min:10", "max:18"],
         ]);
 
         $credentials = $request->validate([
@@ -143,7 +143,7 @@ class DashboardUserController extends Controller
     {
         $rules = [
             "name" => ["required", "max:255"],
-            "nik" => ["required", "size:16", "string"],
+            "nik" => ["required", "string", "min:10", "max:18"],
             "gender" => ['required'],
             "level" => ['required'],
             "image" => ["image", "file", "max:2048"],

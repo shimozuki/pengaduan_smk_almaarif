@@ -105,7 +105,7 @@
                     <a href="#">
                         @if ($complaint->image)
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
-                            src="{{ asset("core/storage/app/public/$complaint->image") }}" alt="{{ $complaint->category->name }}">
+                            src="{{ asset("storage/$complaint->image") }}" alt="{{ $complaint->category->name }}">
                         @else
                         <img class="img-fluid rounded" data-bs-toggle="modal" data-bs-target="#imageDetail"
                             src="{{ asset('images/no-image-2.jpg') }}" alt="{{ $complaint->category->name }}">
@@ -138,7 +138,7 @@
                                         @if ($complaint->image)
                                         <img class="img-fluid rounded" data-bs-toggle="modal"
                                             data-bs-target="#imageDetail"
-                                            src="{{ asset("core/storage/app/public/$complaint->image") }}"
+                                            src="{{ asset("storage/$complaint->image") }}"
                                             alt="{{ $complaint->category->name }}">
                                         @else
                                         <img class="img-fluid rounded" data-bs-toggle="modal"
@@ -175,7 +175,7 @@
                     <div class="col-md-2 d-flex align-items-start">
                         @if ($response->officer->user->image)
                         <img width="200"
-                            src="{{ asset('core/storage/app/public/') . '/' . $response->officer->user->image }}"
+                            src="{{ asset('storage/') . '/' . $response->officer->user->image }}"
                             alt="User avatar" class="img-fluid rounded-circle mx-auto">
                         @else
                         @if ($response->officer->user->gender == 'L')

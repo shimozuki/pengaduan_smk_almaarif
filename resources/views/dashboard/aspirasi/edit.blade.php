@@ -234,7 +234,7 @@
 
                                                 <!-- Image preview -->
                                                 @if ($complaint->image)
-                                                <img src="{{ asset("core/storage/app/public/$complaint->image") }}"
+                                                <img src="{{ asset("storage/$complaint->image") }}"
                                                     class="img-preview img-fluid mb-3 col-sm-5 rounded">
                                                 @endif
 
