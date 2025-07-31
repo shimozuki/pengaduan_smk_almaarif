@@ -509,6 +509,13 @@
                         </a>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
+                            <i class="bi bi-download"></i> Export Keluhan (Excel)
+                        </button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
