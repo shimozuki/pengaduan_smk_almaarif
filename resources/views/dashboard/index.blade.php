@@ -128,6 +128,13 @@
                         </a>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
+                            <i class="bi bi-download"></i> Export Keluhan (Excel)
+                        </button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -1136,6 +1143,54 @@
     @endcan
 </div>
 </div>
+
+@can('admin')
+<!-- Modal Export -->
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('complaints.export') }}" method="GET" target="_blank">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Export Data Keluhan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Tanggal Mulai</label>
+                        <input type="date" class="form-control" name="start_date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">Tanggal Selesai</label>
+                        <input type="date" class="form-control" name="end_date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="">Semua Status</option>
+                            <option value="0">Belum diproses</option>
+                            <option value="1">Sedang diproses</option>
+                            <option value="2">Selesai</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category_id" class="form-label">Kategori</label>
+                        <select name="category_id" class="form-select">
+                            <option value="">Semua Kategori</option>
+                            @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Export</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endcan
+
 @endsection
 
 @section('scripts')

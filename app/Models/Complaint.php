@@ -213,6 +213,11 @@ class Complaint extends Model
         return $this->hasMany(Response::class);
     }
 
+    public function response()
+    {
+        return $this->hasOne(\App\Models\Response::class, 'complaint_id', 'id');
+    }
+
     public static function yourComplaintAxises()
     {
         // Your complaints

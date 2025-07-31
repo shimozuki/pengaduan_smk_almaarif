@@ -81,3 +81,4 @@ Route::group(["middleware" => 'auth', "prefix" => "dashboard"], function () {
 // Responses data
 Route::get('/dashboard/chart-data', [DashboardController::class, "chartData"])->middleware("auth");
 Route::get('/api/statistik-pengaduan', [StatistikPengaduanController::class, 'statistikPengaduan'])->name('api.statistik-pengaduan');
+Route::get('/dashboard/export', [DashboardController::class, 'exportComplaints'])->name('complaints.export');

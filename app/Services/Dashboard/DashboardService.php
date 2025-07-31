@@ -2,7 +2,7 @@
 
 namespace App\Services\Dashboard;
 
-use App\Models\{Complaint, Officer, Response, Student};
+use App\Models\{Category, Complaint, Officer, Response, Student};
 use Illuminate\Database\Eloquent\Collection;
 
 class DashboardService
@@ -38,6 +38,9 @@ class DashboardService
             // Students
             $studentsCount = Student::all()->count();
 
+            // category
+            $categories = Category::all();
+
             // Your responses
             $yourResponsesCount = Response::with(["officer", "complaint"])->where('officer_nik', $user->nik)->count();
             // Recent responses
@@ -51,12 +54,14 @@ class DashboardService
                 "studentsCount" => $studentsCount,
                 "yourResponsesCount" => $yourResponsesCount,
                 "recentResponses" => $recentResponses,
+                "categories" => $categories,
             ]);
         } else if ($user->level === "student" || $user->level === "wali_murid") {
             $complaints = Complaint::with(["student", "responses", "category"])->where("student_nik", $user->nik)->orderByDesc("created_at")->get();
 
             // Your complaints count
             $yourComplaintsCount = $complaints->count();
+
 
             // Recent complaints
             $recentComplaints = $complaints
